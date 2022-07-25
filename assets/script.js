@@ -42,16 +42,19 @@ function gatherWeather(data) {
             currentTemp.text(`Temp: ${currentCityTemp}°F`)
             currentDay.append(currentTemp);
             
+            // adds the wind of the city 
             var currentCityWind = data.current.wind_speed;
             var currentWind = $('<p>')
             currentWind.text(`Wind: ${currentCityWind} MPH`)
             currentDay.append(currentWind);
 
+            // adds humidity of the city 
             var currentCityHumidity = data.current.humidity;
             var currentHumidity = $('<p>')
             currentHumidity.text(`Humidity: ${currentCityHumidity}%`)
             currentDay.append(currentHumidity);
 
+            // adds uv to the city
             var currentCityUV = data.current.uvi;
             var currentUvEl = $('<p>');
             var currentUvSpanEl = $('<span>');
@@ -93,14 +96,17 @@ function gatherWeather(data) {
                 date = data.daily[i].dt;
                 date = moment.unix(date).format("MM/DD/YYYY");
 
+                // gets attributes of temp, icon, wind, and humidity
                 temp = data.daily[i].temp.day;
                 icon = data.daily[i].weather[0].icon;
                 wind = data.daily[i].wind_speed;
                 humidity = data.daily[i].humidity;
 
+                // creates a card class to hold the five day forecasts
                 var card = document.createElement('div');
                 card.classList.add('card', 'col-2', 'm-1', 'bg-primary', 'text-white');
                 
+                // assigns the body content of the card class 
                 var cardBody = document.createElement('div');
                 cardBody.classList.add('card-body');
                 cardBody.innerHTML = `<h6>${date}</h6>
@@ -134,7 +140,7 @@ function displaySearchHistory() {
     }
     return;
 }
-
+// gets the coordinates of inputed city 
 function getCoordinates () {
     var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${myApi}`;
     var storedCities = JSON.parse(localStorage.getItem("cities")) || [];
@@ -150,12 +156,14 @@ function getCoordinates () {
       })
       .then(function(data) {
  
+        // makes cityInfo an object with the city and its coordinates 
         var cityInfo = {
             city: currentCity,
             lon: data.coord.lon,
             lat: data.coord.lat
         }
 
+        // push cityInfo into storedCities variable
         storedCities.push(cityInfo);
         localStorage.setItem("cities", JSON.stringify(storedCities));
 
@@ -194,7 +202,7 @@ function clearCurrentCityWeather () {
     return;
 }
 
-
+// Function that will clear the current city and get coordinates to inputed city 
 function cityFormSubmit (event) {
     event.preventDefault();
     currentCity = cityInput.val().trim();
