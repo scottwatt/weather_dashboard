@@ -18,21 +18,25 @@ function gatherWeather(data) {
             var currentDay = $('#currentDay');
             currentDay.addClass('border border-primary');
 
+            // adds city name as a h2 
             var cityName = $('<h2>');
             cityName.text(currentCity);
             currentDay.append(cityName);
 
+            // adds date to the city 
             var currentCityDate = data.current.dt;
             currentCityDate = moment.unix(currentCityDate).format("MM/DD/YYYY");
             var currentDate = $('<span>');
             currentDate.text(` (${currentCityDate}) `);
             cityName.append(currentDate);
 
+            // adds icon to the city 
             var currentCityWeatherIcon = data.current.weather[0].icon; 
             var currentWeatherIcon = $('<img>');
             currentWeatherIcon.attr("src", "http://openweathermap.org/img/wn/" + currentCityWeatherIcon + ".png");
             cityName.append(currentWeatherIcon);
 
+            // adds the temp in farenheit 
             var currentCityTemp = data.current.temp;
             var currentTemp = $('<p>')
             currentTemp.text(`Temp: ${currentCityTemp}°F`)
