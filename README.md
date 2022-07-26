@@ -1,4 +1,4 @@
-# 05 Work Day Scheduler
+# 06 Weather Dasboard
 
 In this assignment, I was tasked to create a functional weather dashboard that fetched an api and assigned the data inside it to different variables. I then had to display the variables on the page with current information and information for the next 5 days. This application will allow the user to input any city and it will take that value and get the lat and long with the first api call. Then with the second api call it will use the coordinates of the first to pull the weather of the location. This project uses mostly HTML, Bootstrap, and Javascript. 
 
